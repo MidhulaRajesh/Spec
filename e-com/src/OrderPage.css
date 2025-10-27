@@ -1,0 +1,124 @@
+/* OrderPage.css */
+
+.order-page-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 32px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.order-header {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #22223b;
+    letter-spacing: 1px;
+}
+
+.order-summary {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+    background: #f8f9fa;
+}
+
+.order-items {
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    padding: 18px 28px;
+    margin: 0 auto;
+    border: none;
+    transition: box-shadow 0.2s;
+}
+
+.order-item:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.item-details {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.item-image {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #e9ecef;
+}
+
+.item-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #343a40;
+}
+
+.item-qty {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+.item-price {
+    font-weight: 600;
+    color: #22223b;
+    margin-left:150px ;
+}
+
+.order-total {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #3a5a40;
+    margin-top: 16px;
+}
+
+.order-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+}
+
+.order-btn {
+    padding: 12px 32px;
+    border: none;
+    border-radius: 6px;
+    background: #4361ee;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.order-btn:disabled {
+    background: #adb5bd;
+    cursor: not-allowed;
+}
+
+.order-btn:hover:not(:disabled) {
+    background: #3a0ca3;
+}
