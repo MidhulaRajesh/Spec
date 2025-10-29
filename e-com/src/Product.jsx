@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import './product.css';
 import { useCart } from './CartContext';
-import VirtualTryOn from './VirtualTryOn';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function Product({ product }) {
     const { cart, addToCart, buyProduct } = useCart();
     const [showModal, setShowModal] = useState(false);
-    const [showTryOn, setShowTryOn] = useState(false);
+    const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1);
 
     if (!product) return null;
@@ -55,7 +55,7 @@ function Product({ product }) {
             <p>Brand: {product.brand || product.model}</p>
             {isGlassesProduct && (
                 <button 
-                    onClick={() => setShowTryOn(true)} 
+                    onClick={() => navigate('/tryon', { state: { glassesImg: product.image ? `http://localhost:5000${product.image}` : null } })} 
                     style={{ 
                         width: '100%',
                         marginBottom: '10px',
@@ -115,9 +115,7 @@ function Product({ product }) {
                 </div>
             </div>
         )}
-        {showTryOn && (
-            <VirtualTryOn product={product} onClose={() => setShowTryOn(false)} />
-        )}
+        {/* Try-on now handled via navigation to /tryon route */}
         </>
     );
 }

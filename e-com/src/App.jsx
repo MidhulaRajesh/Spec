@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -14,7 +12,7 @@ import SellerDashboard from "./SellerDashboard";
 import AdminLogin from "./AdminLogin";
 import AdminDashboard from "./AdminDashboard";
 import CameraTest from "./CameraTest";
-
+import TryOnPage from './TryOnPage';
 import { CartProvider } from "./CartContext";
 import CartPage from "./CartPage";
 import OrderPage from "./OrderPage";
@@ -73,6 +71,10 @@ function App() {
     {
       path: "/admin-dashboard",
       element: <AdminDashboard />
+    },
+    {
+      path: "/tryon",
+      element: <TryOnPage />
     },
     {
       path: "/camera-test",

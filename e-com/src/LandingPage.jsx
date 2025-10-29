@@ -2,6 +2,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import "./LandingPage.css";
+import specsBg from './assets/specsbg.jpg'; // Update the extension to match your actual file (.jpg, .png, etc)
 
 
 const categories = [
@@ -27,16 +28,26 @@ const LandingPage = () => {
                 <Navbar />
 
                 {/* Hero Section */}
-                <div className="hero" style={{ borderRadius: '0 0 32px 32px', paddingBottom: '2rem' }}>
-                    <h1>Welcome to ShopZone</h1>
-                    <p>Get amazing deals on top products!</p>
-                    <button
-                        className="hero-btn"
-                        onClick={() => window.location.href = "/products"}
-                    >
-                        Shop Now
-                    </button>
-                </div>
+                <div className="hero" style={{ 
+    borderRadius: '0 0 32px 32px', 
+    paddingBottom: '2rem',
+    backgroundImage: `url(${specsBg})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+}}>
+    <div className="hero-content">
+        <h1>Welcome to ShopZone</h1>
+        <p>Get amazing deals on top products!</p>
+        <button
+            className="hero-btn"
+            onClick={() => window.location.href = "/products"}
+        >
+            Shop Now
+        </button>
+    </div>
+</div>
+
 
                 {/* Category Grid */}
                 <section className="category-section">

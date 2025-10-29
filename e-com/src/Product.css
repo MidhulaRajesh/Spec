@@ -2,25 +2,29 @@
     background: #fff;
     border-radius: 16px;
     box-shadow: 0 4px 24px rgba(0,0,0,0.12);
-    padding: 24px 20px 20px 20px;
+    padding: 24px;
     margin: 20px;
-    width: 260px;
+    width: 360px !important;  /* Increased width */
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.card:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-}
-
+/* ✅ Full width image inside card */
 .card img {
+    width: 100% !important;   /* Full card width */
+    height: 250px;            /* Bigger image */
     border-radius: 12px;
     margin-bottom: 16px;
     object-fit: cover;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+
+.card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
 }
 
 .card h3 {
