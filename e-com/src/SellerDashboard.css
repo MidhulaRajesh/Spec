@@ -3,46 +3,54 @@
     padding: 20px;
 }
 
-.dashboard-header {
-    background: white;
-    padding: 20px 30px;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.dashboard-header h1 {
-    margin: 0;
-    color: #333;
-    font-size: 28px;
-}
-
-.dashboard-header p {
-    margin: 5px 0 0 0;
-    color: black;
-}
-
-.logout-btn {
-    background: #ff4d4f;
-    color: white;
-    border: none;
-    padding: 10px 24px;
+/* Orders Table Custom Styles */
+.custom-orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s;
+    overflow: hidden;
+    font-family: inherit;
 }
-
-.logout-btn:hover {
-    background: #ff7875;
+.custom-orders-table th, .custom-orders-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 1.08em;
 }
-
-.dashboard-content {
-    max-width: 1400px;
-    margin: 0 auto;
+.custom-orders-table th {
+    background: #fff;
+    font-weight: 700;
+    font-size: 1.15em;
+    color: #222;
+    letter-spacing: 0.5px;
+}
+.custom-orders-table tr:last-child td {
+    border-bottom: none;
+}
+.custom-orders-table td {
+    vertical-align: middle;
+}
+.custom-orders-table .status-badge {
+    background: #f5d7b6;
+    color: #7c4a00;
+    padding: 4px 16px;
+    border-radius: 16px;
+    font-weight: bold;
+    font-size: 1em;
+    letter-spacing: 1px;
+    display: inline-block;
+}
+/* Status color overrides for other statuses */
+.custom-orders-table .status-badge.status-COMPLETED {
+    background: #c8e6c9;
+    color: #256029;
+}
+.custom-orders-table .status-badge.status-CANCELLED {
+    background: #ffcdd2;
+    color: #b71c1c;
 }
 
 .stats-section {
@@ -288,4 +296,39 @@
 .stats-section .stat-card .stat-number {
     font-size: 30px !important;
     font-weight: 700 !important;
+}
+
+/* Tabs styling for My Products / Customer Orders */
+.tabs-section {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 24px;
+    background: #fff;
+    padding: 18px 0 0 18px;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 12px 32px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #666;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+    border-radius: 8px 8px 0 0;
+}
+
+.tab-btn.active {
+    color: #5f2eea;
+    border-bottom: 3px solid #5f2eea;
+    background: #f6f6ff;
+}
+
+.tab-btn:hover {
+    color: #764ba2;
+    background: #f3f3f3;
 }

@@ -330,7 +330,7 @@ const SellerDashboard = () => {
                             </p>
                         ) : (
                             <div className="orders-table-wrapper">
-                                <table className="orders-table">
+                                <table className="orders-table custom-orders-table">
                                     <thead>
                                         <tr>
                                             <th>Order ID</th>
@@ -348,25 +348,27 @@ const SellerDashboard = () => {
                                             <tr key={order.id}>
                                                 <td>#{order.id}</td>
                                                 <td>
-                                                    <div>
-                                                        <strong>{order.customer?.name || 'N/A'}</strong><br />
-                                                        <small>{order.customer?.email || 'N/A'}</small><br />
-                                                        <small>📞 {order.customer?.phone || 'N/A'}</small>
+                                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                                                        <span style={{ fontWeight: 'bold', fontSize: '1.1em' }}>{order.customer?.name || 'N/A'}</span>
+                                                        <span style={{ fontSize: '0.95em', color: '#222' }}>{order.customer?.email || 'N/A'}</span>
+                                                        <span style={{ fontSize: '0.95em', color: '#d72660', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                            <span style={{ fontSize: '1.1em' }}>📞</span> {order.customer?.phone || 'N/A'}
+                                                        </span>
                                                     </div>
                                                 </td>
                                                 <td>{order.product?.name || 'N/A'}</td>
                                                 <td>{order.quantity}</td>
                                                 <td>₹{order.totalPrice}</td>
                                                 <td>
-                                                    <small>{order.deliveryAddress || 'N/A'}</small>
+                                                    <span style={{ fontSize: '0.98em', color: '#222' }}>{order.deliveryAddress || 'N/A'}</span>
                                                 </td>
                                                 <td>
-                                                    <span className={`status-badge status-${order.status}`}>
+                                                    <span style={{ background: order.status === 'PENDING' ? '#f5d7b6' : '#c8e6c9', color: '#7c4a00', padding: '4px 16px', borderRadius: '16px', fontWeight: 'bold', fontSize: '1em', letterSpacing: '1px', display: 'inline-block' }}>
                                                         {order.status}
                                                     </span>
                                                 </td>
                                                 <td>
-                                                    <small>{new Date(order.orderDate).toLocaleDateString()}</small>
+                                                    <span style={{ fontSize: '0.98em', color: '#222' }}>{new Date(order.orderDate).toLocaleDateString()}</span>
                                                 </td>
                                             </tr>
                                         ))}
