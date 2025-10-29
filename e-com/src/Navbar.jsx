@@ -24,12 +24,10 @@ const Navbar = () => {
     };
 
     return (
-        <>
-            <Sidebar />
-            <nav className="nav">
-                <div className="logo">
-                    <FaShoppingCart style={{  paddingTop: '9px' }} /> MyShop
-                </div>
+        <nav className="nav">
+            <div className="logo">
+                <FaShoppingCart style={{  paddingTop: '9px' }} /> SpecsCart
+            </div>
             <ul className="navLinks">
                 <li><NavLink to="/landingPage" className={({ isActive }) => isActive ? "link active" : "link"}>Home</NavLink></li>
                 <li><NavLink to="/products" className={({ isActive }) => isActive ? "link active" : "link"}>Products</NavLink></li>
@@ -56,7 +54,7 @@ const Navbar = () => {
                 <button type="submit" className="searchButton">Search</button>
             </form>
             </nav>
-        </>
+    
     );
 };
 

@@ -22,7 +22,7 @@
 
 .dashboard-header p {
     margin: 5px 0 0 0;
-    color: #666;
+    color: black;
 }
 
 .logout-btn {
@@ -53,25 +53,30 @@
 }
 
 .stat-card {
-    background: white;
+    background: #ffffff !important; /* Full white card */
     padding: 24px;
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
     text-align: center;
+    border: none;
+    box-shadow: none; /* Remove shadow if you don't want any */
 }
 
+/* Title text - black */
 .stat-card h3 {
-    margin: 0 0 10px 0;
-    color: #666;
-    font-size: 16px;
+    color: #000 !important;
+    font-size: 50px;
+    font-weight: 750;
 }
 
+/* Number - elegant blue */
 .stat-number {
-    font-size: 36px;
-    font-weight: bold;
-    color: #4caf50;
+    font-size: 40px;
+    font-weight: 700;
+    color: #005eff; /* Stylish elegant color */
     margin: 0;
 }
+
+
 
 .products-section {
     background: white;
@@ -271,113 +276,16 @@
     border: 1px solid #b7eb8f;
 }
 
-/* Tabs Section */
-.tabs-section {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
-    background: white;
-    padding: 20px 20px 0;
-    border-radius: 12px 12px 0 0;
+/* Override previous CSS styles */
+.stats-section .stat-card h3 {
+    font-size: 28px !important; 
+    font-weight: 700 !important;
+    color: #000 !important;
+    margin-bottom: 10px;
 }
 
-.tab-btn {
-    background: transparent;
-    border: none;
-    padding: 12px 24px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #666;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s;
+/* Also increase number size */
+.stats-section .stat-card .stat-number {
+    font-size: 30px !important;
+    font-weight: 700 !important;
 }
-
-.tab-btn:hover {
-    color: #667eea;
-}
-
-.tab-btn.active {
-    color: #667eea;
-    border-bottom-color: #667eea;
-}
-
-/* Orders Section */
-.orders-section {
-    background: white;
-    padding: 30px;
-    border-radius: 0 0 12px 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-}
-
-.orders-section h2 {
-    margin: 0 0 24px 0;
-    color: #333;
-}
-
-.orders-table-wrapper {
-    overflow-x: auto;
-}
-
-.orders-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 800px;
-}
-
-.orders-table thead {
-    background: #f5f5f5;
-}
-
-.orders-table th {
-    padding: 12px;
-    text-align: left;
-    font-weight: 600;
-    color: #333;
-    border-bottom: 2px solid #ddd;
-}
-
-.orders-table td {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-    vertical-align: top;
-}
-
-.orders-table tbody tr:hover {
-    background: #f9f9f9;
-}
-
-.status-badge {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: capitalize;
-}
-
-.status-pending {
-    background: #fff7e6;
-    color: #fa8c16;
-}
-
-.status-processing {
-    background: #e6f7ff;
-    color: #1890ff;
-}
-
-.status-shipped {
-    background: #f6ffed;
-    color: #52c41a;
-}
-
-.status-delivered {
-    background: #f0f5ff;
-    color: #2f54eb;
-}
-
-.status-cancelled {
-    background: #fff2f0;
-    color: #ff4d4f;
-}
-
