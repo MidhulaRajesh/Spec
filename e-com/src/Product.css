@@ -1,24 +1,27 @@
 .card {
     background: #fff;
     border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
-    padding: 24px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    padding: 30px;
     margin: 20px;
-    width: 360px !important;  /* Increased width */
+    width: 400px !important;  /* Increased width for better display */
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: transform 0.2s, box-shadow 0.2s;
+    min-height: 620px; /* Ensure consistent card height */
 }
 
-/* ✅ Full width image inside card */
+/* Product image styling */
 .card img {
-    width: 100% !important;   /* Full card width */
-    height: 250px;            /* Bigger image */
+    width: 100% !important;
+    height: 320px !important; /* Taller image for better visibility */
     border-radius: 12px;
-    margin-bottom: 16px;
-    object-fit: cover;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+    object-fit: contain !important; /* Show full image without cropping */
+    background-color: #f8f9fa;
+    padding: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 

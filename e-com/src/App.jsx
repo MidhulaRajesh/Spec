@@ -40,10 +40,6 @@ function App() {
           element: <Register />,
         },
         {
-          path: "landingPage",
-          element: <LandingPage />,
-        },
-        {
           path: "products",
           element: <DynamicContent />,
         },

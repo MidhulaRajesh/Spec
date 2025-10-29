@@ -60,9 +60,17 @@ function Product({ product }) {
         <>
             <div className="card">
                 <img
-                    src={product.image ? `http://localhost:5000${product.image}` : 'https://via.placeholder.com/200'}
+                    src={product.image ? `http://localhost:5000${product.image}` : 'https://via.placeholder.com/300'}
                     alt={product.name}
-                    style={{ width: "200px", height: "200px", objectFit: "cover" }}
+                    style={{ 
+                        width: "100%", 
+                        height: "300px", 
+                        objectFit: "contain",
+                        background: "#f8f9fa",
+                        borderRadius: "12px",
+                        padding: "20px",
+                        marginBottom: "15px"
+                    }}
                 />
 
                 <h3>{product.name}</h3>
