@@ -29,7 +29,7 @@ function App() {
       children: [
         {
           index: true,
-          element: <Login />,
+          element: <LandingPage />,
         },
         {
           path: "login",

@@ -1,4 +1,4 @@
-
+import Navbar from "./Navbar";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Login.css';
@@ -60,7 +60,7 @@ const Login = () => {
     };
 
     return (
-       
+       <><Navbar />
             <div className="login-container">
                 <form onSubmit={handleSubmit} className="login-form" style={{ background: 'rgba(255,255,255,0.85)', borderRadius: '16px', padding: '32px', boxShadow: '0 4px 24px rgba(0,0,0,0.10)' }}>
                     <h2 className="login-title">Welcome Back </h2>
@@ -89,6 +89,7 @@ const Login = () => {
                     <p className="login-footer">Don't have an account? <a href="/register" style={{ color: '#4caf50', textDecoration: 'none', fontWeight: '600' }}>Sign up</a></p>
                 </form>
             </div>
+            </>
      
     );
 };
