@@ -21,6 +21,7 @@ const productRoutes = require('./routes/products');
 const adminRoutes = require('./routes/admin');
 const sellerRoutes = require('./routes/seller');
 const dashboardRoutes = require('./routes/dashboard');
+const orderRoutes = require('./routes/orders');
 
 // Use routes
 app.use('/api/auth', authRoutes);
@@ -28,6 +29,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/seller', sellerRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/orders', orderRoutes);
 
 // Root endpoint
 app.get('/', (req, res) => {

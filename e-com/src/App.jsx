@@ -14,10 +14,12 @@ import SellerDashboard from "./SellerDashboard";
 import AdminLogin from "./AdminLogin";
 import AdminDashboard from "./AdminDashboard";
 import CameraTest from "./CameraTest";
-
+import CustomerDashboard from "./CustomerDashboard";
+import virtual from "./virtual";
 import { CartProvider } from "./CartContext";
 import CartPage from "./CartPage";
 import OrderPage from "./OrderPage";
+import Checkout from "./Checkout";
 import LandingPage from "./LandingPage"; // <-- import the landing page component
 
 function App() {
@@ -55,6 +57,10 @@ function App() {
       element: <OrderPage />
     },
     {
+      path: "/checkout",
+      element: <Checkout />
+    },
+    {
       path: "/seller-register",
       element: <SellerRegister />
     },
@@ -78,6 +84,10 @@ function App() {
       path: "/camera-test",
       element: <CameraTest />
     },
+    {
+      path: "/customer-dashboard",
+      element: <CustomerDashboard />
+    },
   ]);
 
 
@@ -88,6 +98,7 @@ function App() {
      <CartProvider>
       <RouterProvider router={router} />
     </CartProvider>
+     
       
     </>
   )

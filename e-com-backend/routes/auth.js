@@ -34,13 +34,22 @@ router.post('/register', async (req, res) => {
             address: address || ''
         });
 
+        // Generate JWT token for auto-login
+        const token = jwt.sign(
+            { id: customer.id, email: customer.email },
+            JWT_SECRET,
+            { expiresIn: '24h' }
+        );
+
         res.status(201).json({
             message: 'Registration successful',
+            token,
             user: {
                 id: customer.id,
                 name: customer.name,
                 email: customer.email,
-                phone: customer.phone
+                phone: customer.phone,
+                address: customer.address
             }
         });
     } catch (error) {
@@ -116,6 +125,51 @@ router.get('/profile', async (req, res) => {
     } catch (error) {
         console.error('Profile fetch error:', error);
         res.status(401).json({ message: 'Invalid or expired token' });
+    }
+});
+
+// Update customer profile (protected route)
+router.put('/customer/:id', async (req, res) => {
+    try {
+        const token = req.headers.authorization?.split(' ')[1];
+        if (!token) {
+            return res.status(401).json({ message: 'No token provided' });
+        }
+
+        const decoded = jwt.verify(token, JWT_SECRET);
+        const customerId = parseInt(req.params.id);
+
+        // Ensure customer can only update their own profile
+        if (decoded.id !== customerId) {
+            return res.status(403).json({ message: 'Unauthorized to update this profile' });
+        }
+
+        const { phone, address } = req.body;
+
+        const customer = await Customer.findByPk(customerId);
+        if (!customer) {
+            return res.status(404).json({ message: 'Customer not found' });
+        }
+
+        // Update only phone and address
+        await customer.update({
+            phone: phone || customer.phone,
+            address: address || customer.address
+        });
+
+        res.status(200).json({
+            message: 'Profile updated successfully',
+            user: {
+                id: customer.id,
+                name: customer.name,
+                email: customer.email,
+                phone: customer.phone,
+                address: customer.address
+            }
+        });
+    } catch (error) {
+        console.error('Profile update error:', error);
+        res.status(500).json({ message: 'Server error during update', error: error.message });
     }
 });
 

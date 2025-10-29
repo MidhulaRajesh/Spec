@@ -1,10 +1,12 @@
 
 import React, { useState } from "react";
 import { useCart } from "./CartContext";
+import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import cartempty from "./cartempty.png";
 function CartPage() {
     const { cart, removeFromCart, buyProduct } = useCart();
+    const navigate = useNavigate();
     const [modalItem, setModalItem] = useState(null);
 
     function handleBuyNow(item) {
@@ -76,14 +78,27 @@ function CartPage() {
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '2rem' }}>
                     <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-                        Total: ₹{cart.reduce((sum, item) => sum + (item.price || 0), 0)}
+                        Total: ₹{cart.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0)}
                     </div>
                     <button
-                        onClick={handleBuyAll}
-                        style={{ background: '#4caf50', color: '#fff', border: 'none', borderRadius: '24px', padding: '10px 28px', fontWeight: 600, cursor: 'pointer', fontSize: '1rem' }}
+                        onClick={() => {
+                            const customer = localStorage.getItem('customer');
+                            if (!customer) {
+                                alert('Please login to proceed with checkout');
+                                navigate('/login');
+                                return;
+                            }
+                            navigate('/checkout', {
+                                state: {
+                                    cartItems: cart,
+                                    totalAmount: cart.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0)
+                                }
+                            });
+                        }}
+                        style={{ background: '#4caf50', color: '#fff', border: 'none', borderRadius: '24px', padding: '12px 32px', fontWeight: 600, cursor: 'pointer', fontSize: '1.1rem' }}
                         disabled={cart.length === 0}
                     >
-                        Buy All
+                        Proceed to Checkout
                     </button>
                 </div>
                 {modalItem && (

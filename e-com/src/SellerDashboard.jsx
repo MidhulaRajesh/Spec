@@ -5,6 +5,8 @@ import './SellerDashboard.css';
 const SellerDashboard = () => {
     const [seller, setSeller] = useState(null);
     const [products, setProducts] = useState([]);
+    const [orders, setOrders] = useState([]);
+    const [activeTab, setActiveTab] = useState('products'); // 'products' or 'orders'
     const [showAddProduct, setShowAddProduct] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -32,6 +34,7 @@ const SellerDashboard = () => {
 
         setSeller(JSON.parse(sellerData));
         fetchProducts(token);
+        fetchOrders(token);
     }, [navigate]);
 
     const fetchProducts = async (token) => {
@@ -50,6 +53,23 @@ const SellerDashboard = () => {
             console.error('Error fetching products:', err);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const fetchOrders = async (token) => {
+        try {
+            const response = await fetch('http://localhost:5000/api/orders/seller/my-orders', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                setOrders(data.orders);
+            }
+        } catch (err) {
+            console.error('Error fetching orders:', err);
         }
     };
 
@@ -166,119 +186,196 @@ const SellerDashboard = () => {
                         <h3>Total Stock</h3>
                         <p className="stat-number">{products.reduce((sum, p) => sum + (p.stock || 0), 0)}</p>
                     </div>
+                    <div className="stat-card">
+                        <h3>Total Orders</h3>
+                        <p className="stat-number">{orders.length}</p>
+                    </div>
                 </div>
 
-                <div className="products-section">
-                    <div className="section-header">
-                        <h2>My Products</h2>
-                        <button onClick={() => setShowAddProduct(!showAddProduct)} className="add-product-btn">
-                            {showAddProduct ? 'Cancel' : '+ Add Product'}
-                        </button>
-                    </div>
+                <div className="tabs-section">
+                    <button 
+                        className={`tab-btn ${activeTab === 'products' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('products')}
+                    >
+                        My Products
+                    </button>
+                    <button 
+                        className={`tab-btn ${activeTab === 'orders' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('orders')}
+                    >
+                        Customer Orders ({orders.length})
+                    </button>
+                </div>
 
-                    {error && <div className="error-msg">{error}</div>}
-                    {success && <div className="success-msg">{success}</div>}
+                {activeTab === 'products' && (
+                    <div className="products-section">
+                        <div className="section-header">
+                            <h2>My Products</h2>
+                            <button onClick={() => setShowAddProduct(!showAddProduct)} className="add-product-btn">
+                                {showAddProduct ? 'Cancel' : '+ Add Product'}
+                            </button>
+                        </div>
 
-                    {showAddProduct && (
-                        <form onSubmit={handleAddProduct} className="product-form">
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="Product Name *"
-                                value={productForm.name}
-                                onChange={handleInputChange}
-                                required
-                            />
-                            <textarea
-                                name="description"
-                                placeholder="Product Description *"
-                                value={productForm.description}
-                                onChange={handleInputChange}
-                                rows="3"
-                                required
-                            />
-                            <input
-                                type="number"
-                                name="price"
-                                placeholder="Price *"
-                                value={productForm.price}
-                                onChange={handleInputChange}
-                                step="0.01"
-                                required
-                            />
-                            <input
-                                type="text"
-                                name="brand"
-                                placeholder="Brand Name *"
-                                value={productForm.brand}
-                                onChange={handleInputChange}
-                                required
-                            />
-                            <input
-                                type="number"
-                                name="stock"
-                                placeholder="Stock Quantity"
-                                value={productForm.stock}
-                                onChange={handleInputChange}
-                            />
-                            <select
-                                name="category"
-                                value={productForm.category}
-                                onChange={handleInputChange}
-                                className="category-select"
-                            >
-                                <option value="specs">Prescription Specs</option>
-                                <option value="sunglasses">Sunglasses</option>
-                                <option value="glasses">Eyeglasses</option>
-                                <option value="reading">Reading Glasses</option>
-                            </select>
-                            <div className="file-input-wrapper">
-                                <label>Product Image:</label>
+                        {error && <div className="error-msg">{error}</div>}
+                        {success && <div className="success-msg">{success}</div>}
+
+                        {showAddProduct && (
+                            <form onSubmit={handleAddProduct} className="product-form">
                                 <input
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={handleImageChange}
+                                    type="text"
+                                    name="name"
+                                    placeholder="Product Name *"
+                                    value={productForm.name}
+                                    onChange={handleInputChange}
+                                    required
                                 />
-                            </div>
-                            <button type="submit" className="submit-btn">Add Product</button>
-                        </form>
-                    )}
+                                <textarea
+                                    name="description"
+                                    placeholder="Product Description *"
+                                    value={productForm.description}
+                                    onChange={handleInputChange}
+                                    rows="3"
+                                    required
+                                />
+                                <input
+                                    type="number"
+                                    name="price"
+                                    placeholder="Price *"
+                                    value={productForm.price}
+                                    onChange={handleInputChange}
+                                    step="0.01"
+                                    required
+                                />
+                                <input
+                                    type="text"
+                                    name="brand"
+                                    placeholder="Brand Name *"
+                                    value={productForm.brand}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                                <input
+                                    type="number"
+                                    name="stock"
+                                    placeholder="Stock Quantity"
+                                    value={productForm.stock}
+                                    onChange={handleInputChange}
+                                />
+                                <select
+                                    name="category"
+                                    value={productForm.category}
+                                    onChange={handleInputChange}
+                                    className="category-select"
+                                >
+                                    <option value="specs">Prescription Specs</option>
+                                    <option value="sunglasses">Sunglasses</option>
+                                    <option value="glasses">Eyeglasses</option>
+                                    <option value="reading">Reading Glasses</option>
+                                </select>
+                                <div className="file-input-wrapper">
+                                    <label>Product Image:</label>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={handleImageChange}
+                                    />
+                                </div>
+                                <button type="submit" className="submit-btn">Add Product</button>
+                            </form>
+                        )}
 
-                    <div className="products-grid">
-                        {products.length === 0 ? (
+                        <div className="products-grid">
+                            {products.length === 0 ? (
+                                <p style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
+                                    No products yet. Add your first product!
+                                </p>
+                            ) : (
+                                products.map(product => (
+                                    <div key={product.id} className="product-card">
+                                        <img 
+                                            src={product.image ? `http://localhost:5000${product.image}` : 'https://via.placeholder.com/200'} 
+                                            alt={product.name}
+                                        />
+                                        <div className="product-info">
+                                            <h3>{product.name}</h3>
+                                            <p className="product-desc">{product.description}</p>
+                                            <p className="product-brand">Brand: {product.brand}</p>
+                                            {product.category && product.category !== 'general' && (
+                                                <p className="product-category">
+                                                    <span className="category-badge">{product.category}</span>
+                                                </p>
+                                            )}
+                                            <p className="product-price">₹{product.price}</p>
+                                            <p className="product-stock">Stock: {product.stock}</p>
+                                            <button 
+                                                onClick={() => handleDeleteProduct(product.id)} 
+                                                className="delete-btn"
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
+                )}
+
+                {activeTab === 'orders' && (
+                    <div className="orders-section">
+                        <h2>Customer Orders</h2>
+                        {orders.length === 0 ? (
                             <p style={{ textAlign: 'center', padding: '40px', color: '#666' }}>
-                                No products yet. Add your first product!
+                                No orders yet.
                             </p>
                         ) : (
-                            products.map(product => (
-                                <div key={product.id} className="product-card">
-                                    <img 
-                                        src={product.image ? `http://localhost:5000${product.image}` : 'https://via.placeholder.com/200'} 
-                                        alt={product.name}
-                                    />
-                                    <div className="product-info">
-                                        <h3>{product.name}</h3>
-                                        <p className="product-desc">{product.description}</p>
-                                        <p className="product-brand">Brand: {product.brand}</p>
-                                        {product.category && product.category !== 'general' && (
-                                            <p className="product-category">
-                                                <span className="category-badge">{product.category}</span>
-                                            </p>
-                                        )}
-                                        <p className="product-price">₹{product.price}</p>
-                                        <p className="product-stock">Stock: {product.stock}</p>
-                                        <button 
-                                            onClick={() => handleDeleteProduct(product.id)} 
-                                            className="delete-btn"
-                                        >
-                                            Delete
-                                        </button>
-                                    </div>
-                                </div>
-                            ))
+                            <div className="orders-table-wrapper">
+                                <table className="orders-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Customer</th>
+                                            <th>Product</th>
+                                            <th>Quantity</th>
+                                            <th>Total Price</th>
+                                            <th>Shipping Address</th>
+                                            <th>Status</th>
+                                            <th>Order Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {orders.map(order => (
+                                            <tr key={order.id}>
+                                                <td>#{order.id}</td>
+                                                <td>
+                                                    <div>
+                                                        <strong>{order.customer?.name || 'N/A'}</strong><br />
+                                                        <small>{order.customer?.email || 'N/A'}</small><br />
+                                                        <small>📞 {order.customer?.phone || 'N/A'}</small>
+                                                    </div>
+                                                </td>
+                                                <td>{order.product?.name || 'N/A'}</td>
+                                                <td>{order.quantity}</td>
+                                                <td>₹{order.totalPrice}</td>
+                                                <td>
+                                                    <small>{order.deliveryAddress || 'N/A'}</small>
+                                                </td>
+                                                <td>
+                                                    <span className={`status-badge status-${order.status}`}>
+                                                        {order.status}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <small>{new Date(order.orderDate).toLocaleDateString()}</small>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         )}
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );

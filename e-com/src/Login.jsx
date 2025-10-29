@@ -44,9 +44,10 @@ const Login = () => {
 
             if (response.ok) {
                 // Store user data in localStorage
-                localStorage.setItem('user', JSON.stringify(data.user));
-                localStorage.setItem('token', data.token);
-                navigate("/landingPage");
+                localStorage.setItem('customer', JSON.stringify(data.user));
+                localStorage.setItem('customerToken', data.token);
+                // Redirect back to products page after login
+                navigate("/products");
             } else {
                 setError(data.message || "Invalid credentials. Please try again.");
             }
