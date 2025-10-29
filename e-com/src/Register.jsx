@@ -63,10 +63,20 @@ const Register = () => {
             const data = await response.json();
 
             if (response.ok) {
-                setSuccess("Registration successful! Redirecting to login...");
-                setTimeout(() => {
-                    navigate("/login");
-                }, 2000);
+                // Auto-login after registration
+                if (data.token && data.user) {
+                    localStorage.setItem('customer', JSON.stringify(data.user));
+                    localStorage.setItem('customerToken', data.token);
+                    setSuccess("Registration successful! Redirecting to products...");
+                    setTimeout(() => {
+                        navigate("/products");
+                    }, 1500);
+                } else {
+                    setSuccess("Registration successful! Redirecting to login...");
+                    setTimeout(() => {
+                        navigate("/login");
+                    }, 2000);
+                }
             } else {
                 setError(data.message || "Registration failed. Please try again.");
             }

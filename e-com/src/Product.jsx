@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Product({ product }) {
     const { cart, addToCart, buyProduct } = useCart();
+    const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
     const [quantity, setQuantity] = useState(1);
@@ -16,13 +17,27 @@ function Product({ product }) {
     const isInCart = cart.some(item => item.id === product.id);
     const isGlassesProduct = true; // All products are specs/glasses
 
+    const checkLogin = () => {
+        const customer = localStorage.getItem('customer');
+        const token = localStorage.getItem('customerToken');
+        return customer && token;
+    };
+
     function handleAddToCart() {
+        if (!checkLogin()) {
+            setShowLoginPrompt(true);
+            return;
+        }
         if (!isInCart) {
             addToCart(product);
         }
     }
 
     function handleBuyNow() {
+        if (!checkLogin()) {
+            setShowLoginPrompt(true);
+            return;
+        }
         setShowModal(true);
     }
 
@@ -33,7 +48,15 @@ function Product({ product }) {
 
     function handleConfirmBuy() {
         if (quantity < 1) return;
-        buyProduct(product, quantity);
+        
+        // Redirect to checkout with product details
+        navigate('/checkout', {
+            state: {
+                cartItems: [{ ...product, quantity: quantity }],
+                totalAmount: product.price * quantity
+            }
+        });
+        
         setShowModal(false);
         setQuantity(1);
     }
@@ -115,7 +138,90 @@ function Product({ product }) {
                 </div>
             </div>
         )}
+<<<<<<< HEAD
         {/* Try-on now handled via navigation to /tryon route */}
+=======
+        {showTryOn && (
+            <VirtualTryOn product={product} onClose={() => setShowTryOn(false)} />
+        )}
+        {showLoginPrompt && (
+            <div style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh',
+                background: 'rgba(0,0,0,0.5)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                zIndex: 1000
+            }}>
+                <div style={{ 
+                    background: '#fff', 
+                    borderRadius: '16px', 
+                    padding: '40px', 
+                    minWidth: '400px', 
+                    maxWidth: '90vw', 
+                    boxShadow: '0 4px 24px rgba(0,0,0,0.18)', 
+                    textAlign: 'center' 
+                }}>
+                    <div style={{ fontSize: '48px', marginBottom: '16px' }}>🔒</div>
+                    <h2 style={{ margin: '0 0 16px 0', color: '#333' }}>Login Required</h2>
+                    <p style={{ color: '#666', marginBottom: '24px' }}>
+                        Please login or register to add items to cart and make purchases.
+                    </p>
+                    <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
+                        <button 
+                            onClick={() => navigate('/login')}
+                            style={{ 
+                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 
+                                color: '#fff', 
+                                border: 'none', 
+                                borderRadius: '24px', 
+                                padding: '12px 32px', 
+                                fontWeight: 600, 
+                                cursor: 'pointer',
+                                fontSize: '16px'
+                            }}
+                        >
+                            Login
+                        </button>
+                        <button 
+                            onClick={() => navigate('/register')}
+                            style={{ 
+                                background: '#4caf50', 
+                                color: '#fff', 
+                                border: 'none', 
+                                borderRadius: '24px', 
+                                padding: '12px 32px', 
+                                fontWeight: 600, 
+                                cursor: 'pointer',
+                                fontSize: '16px'
+                            }}
+                        >
+                            Register
+                        </button>
+                        <button 
+                            onClick={() => setShowLoginPrompt(false)}
+                            style={{ 
+                                background: '#f0f0f0', 
+                                color: '#333', 
+                                border: 'none', 
+                                borderRadius: '24px', 
+                                padding: '12px 32px', 
+                                fontWeight: 600, 
+                                cursor: 'pointer',
+                                fontSize: '16px'
+                            }}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
+>>>>>>> origin/main
         </>
     );
 }
