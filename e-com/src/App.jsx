@@ -9,6 +9,7 @@ import DynamicContent from "./DynamicContent";
 import SellerRegister from "./SellerRegister";
 import SellerLogin from "./SellerLogin";
 import SellerDashboard from "./SellerDashboard";
+import CustomerDashboard from "./CustomerDashboard";
 import AdminLogin from "./AdminLogin";
 import AdminDashboard from "./AdminDashboard";
 import CameraTest from "./CameraTest";
