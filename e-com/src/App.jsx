@@ -17,91 +17,92 @@ import { CartProvider } from "./CartContext";
 import CartPage from "./CartPage";
 import OrderPage from "./OrderPage";
 import Checkout from "./Checkout";
-import LandingPage from "./LandingPage"; // <-- import the landing page component
+import LandingPage from "./LandingPage";
+import CustomerDashboard from './CustomerDashboard';
+import Layout from './Layout';
 
 function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Login />,
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/register",
-      element: <Register />,
-    },
-    {
-      path: "/landingPage",
-      element: <LandingPage />,
-    },
-    {
-      path: "/products",
-      element: <DynamicContent />,
-    },
-    {
-      path: "/cart",
-      element: <CartPage /> 
-    },
-    {
-      path: "/contactus",
-      element: <Contact />
-    },
-    {
-      path: "/orders",
-      element: <OrderPage />
-    },
-    {
-      path: "/checkout",
-      element: <Checkout />
-    },
-    {
-      path: "/seller-register",
-      element: <SellerRegister />
-    },
-    {
-      path: "/seller-login",
-      element: <SellerLogin />
-    },
-    {
-      path: "/seller-dashboard",
-      element: <SellerDashboard />
-    },
-    {
-      path: "/admin-login",
-      element: <AdminLogin />
-    },
-    {
-      path: "/admin-dashboard",
-      element: <AdminDashboard />
-    },
-    {
-      path: "/tryon",
-      element: <TryOnPage />
-    },
-    {
-      path: "/camera-test",
-      element: <CameraTest />
-    },
-    {
-      path: "/customer-dashboard",
-      element: <CustomerDashboard />
+      element: <Layout />,
+      children: [
+        {
+          index: true,
+          element: <Login />,
+        },
+        {
+          path: "login",
+          element: <Login />,
+        },
+        {
+          path: "register",
+          element: <Register />,
+        },
+        {
+          path: "landingPage",
+          element: <LandingPage />,
+        },
+        {
+          path: "products",
+          element: <DynamicContent />,
+        },
+        {
+          path: "cart",
+          element: <CartPage />
+        },
+        {
+          path: "contactus",
+          element: <Contact />
+        },
+        {
+          path: "orders",
+          element: <OrderPage />
+        },
+        {
+          path: "checkout",
+          element: <Checkout />
+        },
+        {
+          path: "seller-register",
+          element: <SellerRegister />
+        },
+        {
+          path: "seller-login",
+          element: <SellerLogin />
+        },
+        {
+          path: "seller-dashboard",
+          element: <SellerDashboard />
+        },
+        {
+          path: "admin-login",
+          element: <AdminLogin />
+        },
+        {
+          path: "admin-dashboard",
+          element: <AdminDashboard />
+        },
+        {
+          path: "tryon",
+          element: <TryOnPage />
+        },
+        {
+          path: "camera-test",
+          element: <CameraTest />
+        },
+        {
+          path: "customer-dashboard",
+          element: <CustomerDashboard />
+        },
+      ]
     },
   ]);
 
-
-
-
   return (
-    <>
-     <CartProvider>
+    <CartProvider>
       <RouterProvider router={router} />
     </CartProvider>
-     
-      
-    </>
   )
 }
 
