@@ -54,7 +54,7 @@ const Navbar = () => {
                 <button type="submit" className="searchButton">Search</button>
             </form>
             </nav>
-        </>
+    
     );
 };
 
