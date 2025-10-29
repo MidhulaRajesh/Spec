@@ -5,14 +5,16 @@ import "./LandingPage.css";
 import specsBg from './assets/specsbg.jpg'; // Update the extension to match your actual file (.jpg, .png, etc)
 
 
+import prescGlasses from './assets/presc.jpg';
+import sunGlasses from './assets/sunglass.jpg';
+import readingGlasses from './assets/reading.jpg';
+import eyeGlasses from './assets/eyeglass.jpg';
+
 const categories = [
-    "Mobiles",
-    "Fashion",
-    "Electronics",
-    "Groceries",
-    "Furniture",
-    "Books",
-    "Beauty",
+    { name: "Prescription Glasses", image: prescGlasses },
+    { name: "Sunglasses", image: sunGlasses },
+    { name: "Reading Glasses", image: readingGlasses },
+    { name: "Eye Glasses", image: eyeGlasses },
 ];
 
 const LandingPage = () => {
@@ -51,17 +53,32 @@ const LandingPage = () => {
 
                 {/* Category Grid */}
                 <section className="category-section">
-                    <h2>Shop by Category</h2>
+                    <h2>Categories</h2>
                     <div className="category-grid">
                         {categories.map((category, index) => (
                             <div
                                 className="category-card"
                                 key={index}
-                                onClick={() => window.location.href = "/products"
-                                }
+                                onClick={() => window.location.href = "/products"}
                             >
-                                
-                                <p>{category}</p>
+                                <img 
+                                    src={category.image} 
+                                    alt={category.name}
+                                    style={{
+                                        width: '100%',
+                                        height: '280px',
+                                        objectFit: 'contain',
+                                        borderRadius: '12px',
+                                        marginBottom: '12px',
+                                        background: '#f5f5f5'
+                                    }}
+                                />
+                                <p style={{
+                                    fontSize: '1.2rem',
+                                    fontWeight: '600',
+                                    color: '#333',
+                                    margin: '0'
+                                }}>{category.name}</p>
                             </div>
                         ))}
                     </div>

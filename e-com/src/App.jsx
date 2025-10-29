@@ -9,7 +9,6 @@ import DynamicContent from "./DynamicContent";
 import SellerRegister from "./SellerRegister";
 import SellerLogin from "./SellerLogin";
 import SellerDashboard from "./SellerDashboard";
-import CustomerDashboard from "./CustomerDashboard";
 import AdminLogin from "./AdminLogin";
 import AdminDashboard from "./AdminDashboard";
 import CameraTest from "./CameraTest";
@@ -30,7 +29,7 @@ function App() {
       children: [
         {
           index: true,
-          element: <Login />,
+          element: <LandingPage />,
         },
         {
           path: "login",
@@ -39,10 +38,6 @@ function App() {
         {
           path: "register",
           element: <Register />,
-        },
-        {
-          path: "landingPage",
-          element: <LandingPage />,
         },
         {
           path: "products",

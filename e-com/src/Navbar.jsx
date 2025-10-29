@@ -26,10 +26,10 @@ const Navbar = () => {
     return (
         <nav className="nav">
             <div className="logo">
-                <FaShoppingCart style={{  paddingTop: '9px' }} /> SpecsCart
+                <FaShoppingCart style={{  paddingTop: '9px', paddingLeft: '35px' }} /> SpecsCart
             </div>
             <ul className="navLinks">
-                <li><NavLink to="/landingPage" className={({ isActive }) => isActive ? "link active" : "link"}>Home</NavLink></li>
+                <li><NavLink to="/" className={({ isActive }) => isActive ? "link active" : "link"}>Home</NavLink></li>
                 <li><NavLink to="/products" className={({ isActive }) => isActive ? "link active" : "link"}>Products</NavLink></li>
                 {isLoggedIn && (
                     <>
