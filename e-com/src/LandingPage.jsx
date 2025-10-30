@@ -39,7 +39,7 @@ const LandingPage = () => {
     backgroundRepeat: 'no-repeat',
 }}>
     <div className="hero-content">
-        <h1>Welcome to ShopZone</h1>
+        <h1>Welcome to SpecsCart</h1>
         <p>Get amazing deals on top products!</p>
         <button
             className="hero-btn"
@@ -66,11 +66,11 @@ const LandingPage = () => {
                                     alt={category.name}
                                     style={{
                                         width: '100%',
-                                        height: '280px',
+                                        height: '45%',
                                         objectFit: 'contain',
                                         borderRadius: '12px',
                                         marginBottom: '12px',
-                                        background: '#f5f5f5'
+                                        background: '#ffffff'
                                     }}
                                 />
                                 <p style={{
@@ -87,7 +87,7 @@ const LandingPage = () => {
 
             {/* Footer */}
             <footer className="footer">
-                <p>&copy; 2025 ShopZone. All rights reserved.</p>
+                <p>&copy; 2025 SpecsCart. All rights reserved.</p>
             </footer>
         </>
     );

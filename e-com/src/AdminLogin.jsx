@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Login.css';
+import Navbar from "./Navbar";
 
 const AdminLogin = () => {
     const [form, setForm] = useState({ email: "", password: "" });
@@ -53,6 +54,8 @@ const AdminLogin = () => {
     };
 
     return (
+        <>
+        <Navbar/>
         <div className="login-container">
             <form onSubmit={handleSubmit} className="login-form" style={{ background: 'rgba(255,255,255,0.85)', borderRadius: '16px', padding: '32px', boxShadow: '0 4px 24px rgba(0,0,0,0.10)' }}>
                 <h2 className="login-title">Admin Login</h2>
@@ -83,6 +86,7 @@ const AdminLogin = () => {
                 </p>
             </form>
         </div>
+        </>
     );
 };
 

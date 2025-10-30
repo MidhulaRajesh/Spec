@@ -125,7 +125,7 @@ link.click();
       } catch (error) {
         console.error('Error detecting face:', error);
       }
-    }, 150);
+    }, 300);
 
     return () => {
       clearInterval(interval);
