@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminDashboard.css';
+import Navbar from './Navbar';
 
 const AdminDashboard = () => {
     const [admin, setAdmin] = useState(null);
@@ -150,6 +151,8 @@ const AdminDashboard = () => {
     }
 
     return (
+        <>
+        <Navbar/>
         <div className="admin-dashboard">
             <header className="admin-header">
                 <div>
@@ -374,6 +377,7 @@ const AdminDashboard = () => {
                 )}
             </div>
         </div>
+        </>
     );
 };
 

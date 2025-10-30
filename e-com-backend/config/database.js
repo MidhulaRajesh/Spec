@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize');
 
 // Create a Sequelize instance
 // Update these credentials based on your MySQL configuration
-const sequelize = new Sequelize('ecommerce_db', 'root', 'root123', {
+const sequelize = new Sequelize('ecommerce_db', 'root', 'Midhu@123', {
     host: 'localhost',
     dialect: 'mysql',
     logging: false,
